@@ -4,7 +4,7 @@ from sklearn.preprocessing import normalize
 
 
 class L2NormLayer(caffe.Layer):
-    """norm2 layer used for L2 normalization."""
+    """L2norm layer used for L2 normalization."""
 
     def setup(self, bottom, top):
         """Setup the TripletDataLayer."""

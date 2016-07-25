@@ -6,7 +6,7 @@ from collections import defaultdict
 class TripletSampleLayer(caffe.Layer):
 
     def setup(self, bottom, top):
-        """Setup the TripletSelectLayer."""
+        """Setup the TripletSampleLayer."""
         top[0].reshape(*bottom[0].data.shape)
         top[1].reshape(*bottom[0].data.shape)
         top[2].reshape(*bottom[0].data.shape)

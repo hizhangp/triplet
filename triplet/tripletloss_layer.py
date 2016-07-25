@@ -6,7 +6,7 @@ import config as cfg
 class TripletLayer(caffe.Layer):
 
     def setup(self, bottom, top):
-        """Setup the TripletDataLayer."""
+        """Setup the TripletLayer."""
 
         assert bottom[0].num == bottom[1].num, '{} != {}'.format(bottom[0].num, bottom[1].num)
         assert bottom[0].num == bottom[2].num, '{} != {}'.format(bottom[0].num, bottom[2].num)
@@ -24,18 +24,6 @@ class TripletLayer(caffe.Layer):
         negative = np.array(bottom[2].data)
         aps = np.sum((anchor - positive) ** 2, axis=1)
         ans = np.sum((anchor - negative) ** 2, axis=1)
-        
-        # if cfg.SEMI_HARD:
-        #     # sort aps(decrease) & ans(increase)
-        #     self.aps_sorted = np.argsort(aps)[::-1]
-        #     self.ans_sorted = np.argsort(ans)
-        #     aps = aps[self.aps_sorted]
-        #     ans = ans[self.ans_sorted]
-        #     idxes = np.where(aps < ans[0])[0]
-        #     if len(idxes) > 0:
-        #         idx = idxes[0]
-        #         aps = np.hstack((aps[idx:], np.zeros(idx)))
-        #         self.aps_sorted = np.hstack((self.aps_sorted[idx:], self.aps_sorted[:idx]))
 
         dist = self.margin + aps - ans
         dist_hinge = np.maximum(dist, 0.0)
