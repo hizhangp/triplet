@@ -1,6 +1,7 @@
 import caffe
 import numpy as np
 import config as cfg
+from collections import defaultdict
 
 class TripletSampleLayer(caffe.Layer):
 
@@ -21,12 +22,9 @@ class TripletSampleLayer(caffe.Layer):
         top_positive = []
         top_negative = []
 
-        label_index_map = {}
+        label_index_map = defaultdict(list)
         for i in xrange(bottom[0].num):
-            if bottom_label[i] not in label_index_map:
-                label_index_map[bottom_label[i]] = [i]
-            else:
-                label_index_map[bottom_label[i]].append(i)
+            label_index_map[bottom_label[i]].append(i)
 
         for i in xrange(bottom[0].num):
             anchor_label = bottom_label[i]

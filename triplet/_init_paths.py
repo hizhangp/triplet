@@ -1,5 +1,3 @@
-"""Set up paths for tripletloss"""
-
 import os.path as osp
 import sys
 import config as cfg

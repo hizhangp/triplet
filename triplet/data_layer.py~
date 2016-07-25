@@ -1,3 +1,8 @@
+"""The data layer used during training to train the network.
+   This is a example for online triplet selection
+   Each minibatch contains a set of anchor-positive pairs, random select negative exemplar
+"""
+
 import caffe
 import numpy as np
 import cv2
@@ -21,8 +26,7 @@ class DataLayer(caffe.Layer):
                 sample.append(sample_person[person].pop())
             if len(sample_person[person]) == 0:
                 sample_person.pop(person)
-        assert len(sample) == len(self._data._sample), '{} != {}'.format(
-                                len(sample), len(self._data._sample))
+        assert len(sample) == len(self._data._sample), '{} != {}'.format(len(sample), len(self._data._sample))
         self._data._sample = sample
 
 
@@ -35,10 +39,10 @@ class DataLayer(caffe.Layer):
             self._index += self.batch_size
         else:
             sample = self._data._sample[self._index:]
-            if cfg.TRIPLET_LOSS:
-                self._shuffle_data()
-            else:
+            if not cfg.TRIPLET_LOSS:
                 np.random.shuffle(self._data._sample)
+            else:
+                self._shuffle_data()
             self._epoch += 1
             print 'Epoch {}'.format(self._epoch)
             self._index = self.batch_size - len(sample)
@@ -69,16 +73,18 @@ class DataLayer(caffe.Layer):
     def set_data(self, data):
         """Set the data to be used by this layer during training."""
         self._data = data
-        if cfg.TRIPLET_LOSS:
-            self._shuffle_data()
-        else:
+        if not cfg.TRIPLET_LOSS:
             np.random.shuffle(self._data._sample)
+        else:
+            self._shuffle_data()
 
     def setup(self, bottom, top):
         """Setup the DataLayer."""
 
         if cfg.TRIPLET_LOSS:
             self.batch_size = cfg.TRIPLET_BATCH_SIZE
+            assert self.batch_size % 3 == 0
+            self.triplet = self.batch_size / 3
         else:
             self.batch_size = cfg.BATCH_SIZE
         self._name_to_top_map = {

@@ -1,3 +1,5 @@
+"""Blob helper functions."""
+
 import numpy as np
 import cv2
 

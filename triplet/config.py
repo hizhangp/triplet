@@ -14,7 +14,7 @@ SNAPSHOT_ITERS = 2000
 MAX_ITERS = 50000
 
 # The number of samples in each minibatch for triplet loss
-TRIPLET_BATCH_SIZE = 150
+TRIPLET_BATCH_SIZE = 60
 
 # The number of samples in each minibatch for other loss
 BATCH_SIZE = 60

@@ -1,6 +1,3 @@
-"""The data layer used during training a VGG_FACE network by triplet loss.
-"""
-
 import caffe
 import numpy as np
 from sklearn.preprocessing import normalize
@@ -21,7 +18,7 @@ class L2NormLayer(caffe.Layer):
 
     def backward(self, top, propagate_down, bottom):
 
-        norm = np.linalg.norm(bottom[0].data, axis=1)
+        norm = np.linalg.norm(bottom[0].data, axis=1)[:, np.newaxis]
         td = top[0].diff
         bd = bottom[0].data
         bottom_n2 = td * norm - (bd * td).sum(axis=1)[:, np.newaxis] * bd / norm

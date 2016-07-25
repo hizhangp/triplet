@@ -1,3 +1,5 @@
+"""Train the network."""
+
 import triplet._init_paths
 import triplet.config as cfg
 from triplet.sampledata import sampledata
