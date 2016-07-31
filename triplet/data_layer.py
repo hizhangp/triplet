@@ -16,13 +16,13 @@ class DataLayer(caffe.Layer):
             np.random.shuffle(sample_person[i])
         while len(sample_person) > 0:
             person = np.random.choice(sample_person.keys())
-            sample.append(sample_person[person].pop())
-            if len(sample_person[person]) > 0:
-                sample.append(sample_person[person].pop())
-            if len(sample_person[person]) == 0:
+            if len(sample_person[person]) < cfg.CUT_SIZE:
                 sample_person.pop(person)
-        assert len(sample) == len(self._data._sample), '{} != {}'.format(
-                                len(sample), len(self._data._sample))
+                continue
+            num = 0
+            while num < cfg.CUT_SIZE and len(sample_person[person]) > 0:
+                sample.append(sample_person[person].pop())
+                num += 1
         self._data._sample = sample
 
 

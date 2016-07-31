@@ -4,6 +4,9 @@ from numpy import *
 # Training image data path
 IMAGEPATH = 'data/face/'
 
+# LFW image data path
+LFW_IMAGEPATH = 'data/LFW/lfw-deepfunneled/'
+
 # Path to caffe directory
 CAFFEPATH = '/home/peng/caffe'
 
@@ -14,7 +17,7 @@ SNAPSHOT_ITERS = 2000
 MAX_ITERS = 50000
 
 # The number of samples in each minibatch for triplet loss
-TRIPLET_BATCH_SIZE = 60
+TRIPLET_BATCH_SIZE = 50
 
 # The number of samples in each minibatch for other loss
 BATCH_SIZE = 60
@@ -29,4 +32,7 @@ FLIPPED = True
 PERCENT = 0.8
 
 # USE semi-hard negative mining during training?
-SEMI_HARD = False
+SEMI_HARD = True
+
+# Number of samples of each identity in a minibatch
+CUT_SIZE = 5
