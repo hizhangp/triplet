@@ -8,6 +8,7 @@ import os
 from caffe.proto import caffe_pb2
 import google.protobuf as pb2
 
+
 class SolverWrapper(object):
     """A simple wrapper around Caffe's solver.
     """
@@ -30,7 +31,6 @@ class SolverWrapper(object):
 
         self.solver.net.layers[0].set_data(data)
 
-
     def snapshot(self):
         """Take a snapshot of the network after unnormalizing the learned
         """
@@ -45,7 +45,6 @@ class SolverWrapper(object):
 
         net.save(str(filename))
         print 'Wrote snapshot to: {:s}'.format(filename)
-
 
     def train_model(self, max_iters):
         """Network training loop."""

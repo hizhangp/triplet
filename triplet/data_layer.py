@@ -16,22 +16,22 @@ class DataLayer(caffe.Layer):
             np.random.shuffle(sample_person[i])
         while len(sample_person) > 0:
             person = np.random.choice(sample_person.keys())
-            if len(sample_person[person]) < cfg.CUT_SIZE:
-                sample_person.pop(person)
-                continue
+            while len(sample_person[person]) < cfg.CUT_SIZE:
+                sample_person[person].append(
+                    np.random.choice(self._data._sample_person[person]))
             num = 0
-            while num < cfg.CUT_SIZE and len(sample_person[person]) > 0:
+            while num < cfg.CUT_SIZE:
                 sample.append(sample_person[person].pop())
                 num += 1
         self._data._sample = sample
-
 
     def _get_next_minibatch(self):
         # Sample to use for each image in this batch
         # Sample the samples randomly
 
         if self._index + self.batch_size <= len(self._data._sample):
-            sample = self._data._sample[self._index:self._index + self.batch_size]
+            sample = self._data._sample[
+                self._index:self._index + self.batch_size]
             self._index += self.batch_size
         else:
             sample = self._data._sample[self._index:]
@@ -44,12 +44,12 @@ class DataLayer(caffe.Layer):
             self._index = self.batch_size - len(sample)
             sample.extend(self._data._sample[:self._index])
 
-        im_blob,labels_blob = self._get_image_blob(sample)
+        im_blob, labels_blob = self._get_image_blob(sample)
         blobs = {'data': im_blob,
-             'labels': labels_blob}
+                 'labels': labels_blob}
         return blobs
 
-    def _get_image_blob(self,sample):
+    def _get_image_blob(self, sample):
         im_blob = []
         labels_blob = []
         for i in range(self.batch_size):
@@ -64,7 +64,7 @@ class DataLayer(caffe.Layer):
 
         # Create a blob to hold the input images
         blob = im_list_to_blob(im_blob)
-        return blob,labels_blob
+        return blob, labels_blob
 
     def set_data(self, data):
         """Set the data to be used by this layer during training."""

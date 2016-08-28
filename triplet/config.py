@@ -8,7 +8,7 @@ IMAGEPATH = 'data/face/'
 LFW_IMAGEPATH = 'data/LFW/lfw-deepfunneled/'
 
 # Path to caffe directory
-CAFFEPATH = '/home/peng/caffe'
+CAFFEPATH = '~/caffe'
 
 # Snapshot iteration
 SNAPSHOT_ITERS = 2000

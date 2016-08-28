@@ -2,6 +2,7 @@ import os
 import config as cfg
 import numpy as np
 
+
 class sampledata():
 
     def __init__(self):
