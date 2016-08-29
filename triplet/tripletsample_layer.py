@@ -63,18 +63,18 @@ class TripletSampleLayer(caffe.Layer):
 
                     max_iter -= 1
                     if max_iter <= 0:
-                        print 'Semi-hard failed'
+                        # print 'Semi-hard failed'
                         negative_label = anchor_label
                         negative_index = positive_index
                         negative = positive
                         break
                 # print [anchor_label, negative_label]
 
-                top_anchor.append(anchor)
-                top_positive.append(positive)
-                top_negative.append(negative)
+            top_anchor.append(anchor)
+            top_positive.append(positive)
+            top_negative.append(negative)
 
-                self.index_map.append([i, positive_index, negative_index])
+            self.index_map.append([i, positive_index, negative_index])
 
         top[0].reshape(*np.array(top_anchor).shape)
         top[1].reshape(*np.array(top_anchor).shape)

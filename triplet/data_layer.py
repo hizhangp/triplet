@@ -10,6 +10,7 @@ class DataLayer(caffe.Layer):
     """Sample data layer used for training."""
 
     def _shuffle_data(self):
+        print 'Shuffling the data ...'
         sample = []
         sample_person = copy.deepcopy(self._data._sample_person)
         for i in sample_person.keys():
@@ -23,6 +24,8 @@ class DataLayer(caffe.Layer):
             while num < cfg.CUT_SIZE:
                 sample.append(sample_person[person].pop())
                 num += 1
+            if len(sample_person[person]) == 0:
+                sample_person.pop(person)
         self._data._sample = sample
 
     def _get_next_minibatch(self):
@@ -70,6 +73,7 @@ class DataLayer(caffe.Layer):
         """Set the data to be used by this layer during training."""
         self._data = data
         if cfg.TRIPLET_LOSS:
+            print 'Epoch {}'.format(self._epoch)
             self._shuffle_data()
         else:
             np.random.shuffle(self._data._sample)
