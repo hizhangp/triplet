@@ -535,20 +535,11 @@ layer {
 #  loss_weight: 1
 # }
 #====================tripletloss==================
-layer {
-  name: "norm2"
-  type: "Python"
-  bottom: "fc7"
-  top: "norm2"
-  python_param {
-    module: "l2norm_layer"
-    layer: "L2NormLayer"
-  }
-}
+
 layer {
   name: "fc9_1"
   type: "InnerProduct"
-  bottom: "norm2"
+  bottom: "fc7"
   top: "fc9_1"
   param {
     lr_mult: 1
@@ -570,9 +561,19 @@ layer {
   }
 }
 layer {
-  name: "tripletsample"
+  name: "norm2"
   type: "Python"
   bottom: "fc9_1"
+  top: "norm2"
+  python_param {
+    module: "l2norm_layer"
+    layer: "L2NormLayer"
+  }
+}
+layer {
+  name: "tripletsample"
+  type: "Python"
+  bottom: "norm2"
   bottom: "labels"
   top: "anchor"
   top: "positive"

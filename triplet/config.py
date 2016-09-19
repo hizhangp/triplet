@@ -1,5 +1,4 @@
 import os
-from numpy import *
 
 # Training image data path
 IMAGEPATH = 'data/face/'
