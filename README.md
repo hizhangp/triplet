@@ -1,10 +1,10 @@
 # Triplet
 
-This is the re-implementation of triplet loss function used in Google's [FaceNet paper](http://arxiv.org/abs/1503.03832v1) and VGG's [DeepFace paper](https://www.robots.ox.ac.uk/~vgg/publications/2015/Parkhi15/parkhi15.pdf).
+This is the re-implementation of triplet loss function used in Google's [FaceNet paper](http://arxiv.org/abs/1503.03832v1).
 
 ## Dataset
 
-I use [FaceScrub](http://vintage.winklerbros.net/facescrub.html) as traning dataset, you should modify `sampledata.py` to fit your dataset.
+FaceScrub](http://vintage.winklerbros.net/facescrub.html) is used as traning dataset, you should modify `sampledata.py` to fit your dataset.
 
 ## Setup
 
@@ -27,6 +27,6 @@ Then build caffe and pycaffe:
 
 2. Pre-train your model with softmax loss.
 
-3. Train triplet model based on your pre-trained model.
+3. Finetune triplet model based on your pre-trained model.
 
 4. Learn to adjust parameters.
