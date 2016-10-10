@@ -1,10 +1,10 @@
 # Triplet
 
-This is the re-implementation of triplet loss function used in Google's [FaceNet paper](http://arxiv.org/abs/1503.03832v1).
+This is the re-implementation of triplet loss function in Google's [FaceNet paper](http://arxiv.org/abs/1503.03832v1).
 
 ## Dataset
 
-FaceScrub](http://vintage.winklerbros.net/facescrub.html) is used as traning dataset, you should modify `sampledata.py` to fit your dataset.
+[FaceScrub](http://vintage.winklerbros.net/facescrub.html) is used as traning dataset, you should modify `sampledata.py` to fit your dataset.
 
 ## Setup
 
