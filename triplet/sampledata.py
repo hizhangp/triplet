@@ -29,9 +29,9 @@ class sampledata():
                 self._sample_person[personname].extend(picnames_flipped)
                 self._sample.extend(picnames_flipped)
 
-        print 'Number of training persons: {}'.format(len(self._sample_person))
-        print 'Number of training images: {}'.format(len(self._sample))
-        print 'Number of testing images: {}'.format(len(self._sample_test))
+        print('Number of training persons: {}'.format(len(self._sample_person)))
+        print('Number of training images: {}'.format(len(self._sample)))
+        print('Number of testing images: {}'.format(len(self._sample_test)))
 
 if __name__ == '__main__':
 

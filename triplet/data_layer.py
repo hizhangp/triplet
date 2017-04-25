@@ -10,7 +10,7 @@ class DataLayer(caffe.Layer):
     """Sample data layer used for training."""
 
     def _shuffle_data(self):
-        print 'Shuffling the data ...'
+        print('Shuffling the data ...')
         sample = []
         sample_person = copy.deepcopy(self._data._sample_person)
         for i in sample_person.keys():
@@ -43,7 +43,7 @@ class DataLayer(caffe.Layer):
             else:
                 np.random.shuffle(self._data._sample)
             self._epoch += 1
-            print 'Epoch {}'.format(self._epoch)
+            print('Epoch {}'.format(self._epoch))
             self._index = self.batch_size - len(sample)
             sample.extend(self._data._sample[:self._index])
 
@@ -73,7 +73,7 @@ class DataLayer(caffe.Layer):
         """Set the data to be used by this layer during training."""
         self._data = data
         if cfg.TRIPLET_LOSS:
-            print 'Epoch {}'.format(self._epoch)
+            print('Epoch {}'.format(self._epoch))
             self._shuffle_data()
         else:
             np.random.shuffle(self._data._sample)

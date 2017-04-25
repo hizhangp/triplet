@@ -28,7 +28,7 @@ class lfwdata():
                 assert False, pair
             self._pairs.append({'img': [img1, img2], 'label': label})
 
-        print 'Number of pairs: {}'.format(len(self._pairs))
+        print('Number of pairs: {}'.format(len(self._pairs)))
 
 if __name__ == '__main__':
 

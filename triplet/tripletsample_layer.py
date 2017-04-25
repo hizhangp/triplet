@@ -27,10 +27,10 @@ class TripletSampleLayer(caffe.Layer):
         top_negative = []
 
         label_index_map = defaultdict(list)
-        for i in xrange(bottom[0].num):
+        for i in range(bottom[0].num):
             label_index_map[bottom_label[i]].append(i)
 
-        for i in xrange(bottom[0].num):
+        for i in range(bottom[0].num):
             anchor_label = bottom_label[i]
             anchor = bottom_data[i]
 
@@ -70,11 +70,11 @@ class TripletSampleLayer(caffe.Layer):
                         break
                 # print [anchor_label, negative_label]
 
-            	top_anchor.append(anchor)
-            	top_positive.append(positive)
-            	top_negative.append(negative)
+                top_anchor.append(anchor)
+                top_positive.append(positive)
+                top_negative.append(negative)
 
-            	self.index_map.append([i, positive_index, negative_index])
+                self.index_map.append([i, positive_index, negative_index])
 
         top[0].reshape(*np.array(top_anchor).shape)
         top[1].reshape(*np.array(top_anchor).shape)
@@ -92,9 +92,9 @@ class TripletSampleLayer(caffe.Layer):
         """Get top diff and compute diff in bottom."""
 
         if propagate_down[0]:
-            bottom_diff = np.zeros(top[0].diff.shape)
+            bottom_diff = np.zeros(bottom[0].diff.shape)
 
-            for i in xrange(top[0].num):
+            for i in range(top[0].num):
                 bottom_diff[self.index_map[i][0]] += top[0].diff[i]
                 bottom_diff[self.index_map[i][1]] += top[1].diff[i]
                 bottom_diff[self.index_map[i][2]] += top[2].diff[i]

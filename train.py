@@ -21,8 +21,8 @@ class SolverWrapper(object):
         caffe.set_device(gpu_id)
         self.solver = caffe.SGDSolver(solver)
         if pretrained_model is not None:
-            print ('Loading pretrained model '
-                   'weights from {:s}').format(pretrained_model)
+            print(('Loading pretrained model '
+                   'weights from {:s}').format(pretrained_model))
             self.solver.net.copy_from(pretrained_model)
 
         self.solver_param = caffe_pb2.SolverParameter()
@@ -44,7 +44,7 @@ class SolverWrapper(object):
         filename = os.path.join(self.output_dir, filename)
 
         net.save(str(filename))
-        print 'Wrote snapshot to: {:s}'.format(filename)
+        print('Wrote snapshot to: {:s}'.format(filename))
 
     def train_model(self, max_iters):
         """Network training loop."""
@@ -60,10 +60,10 @@ class SolverWrapper(object):
             timer.toc()
 
             if self.solver.iter % (1 * self.solver_param.display) == 0:
-                print '---------------------------------------------------------'
-                print 'speed: {:.3f}s / iter'.format(timer.average_time)
-                print 'time remains: {}s'.format(timer.remain(self.solver.iter, max_iters))
-                print '---------------------------------------------------------'
+                print('---------------------------------------------------------')
+                print('speed: {:.3f}s / iter'.format(timer.average_time))
+                print('time remains: {}s'.format(timer.remain(self.solver.iter, max_iters)))
+                print('---------------------------------------------------------')
 
             if self.solver.iter % cfg.SNAPSHOT_ITERS == 0:
                 last_snapshot_iter = self.solver.iter
@@ -89,10 +89,10 @@ if __name__ == '__main__':
     max_iters = cfg.MAX_ITERS
 
     if not os.path.exists(output_dir):
-        os.mkdir(output_dir)
+        os.makedirs(output_dir)
 
     sw = SolverWrapper(solver, output_dir, pretrained_model, gpu_id, data)
 
-    print 'Solving...'
+    print('Solving...')
     sw.train_model(max_iters)
-    print 'done solving'
+    print('done solving')
