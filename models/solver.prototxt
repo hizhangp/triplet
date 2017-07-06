@@ -1,6 +1,6 @@
 net: "models/train.prototxt"
-test_iter: 0
-test_interval: 1000000
+#test_iter: 0
+#test_interval: 1000000
 base_lr: 0.1
 lr_policy: "step"
 gamma: 0.1
